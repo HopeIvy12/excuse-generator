@@ -32,7 +32,9 @@ export default [
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
-      ],
+      ], "rules": {
+        "react/prop-types": 0
+      }
     },
   },
 ]
