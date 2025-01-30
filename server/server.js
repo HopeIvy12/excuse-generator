@@ -24,34 +24,70 @@ app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
 });
 
-let category = "Avoiding People";
-
-async function fetchAllExcuses() {
+app.get("/categories", async (req, res) => {
   try {
-    const getExcuses = await pool.query(
-      "SELECT * FROM soc_wk8_excuses WHERE category=($1) ORDER BY RANDOM() LIMIT 1",
-      [category]
+    const result = await pool.query(
+      "SELECT DISTINCT category FROM soc_wk8_excuses"
     );
-    console.log(getExcuses.rows);
-    return getExcuses.rows;
-  } catch (error) {
-    console.error("Error executing query:", error);
-    throw error;
-  }
-}
 
-app.get("/", async function (req, res) {
-  console.log("request received!");
-  try {
-    const excuses = await fetchAllExcuses();
-    console.log(excuses);
-    res.status(200).json({ status: "success", payload: excuses });
+    if (result.rows.length === 0) {
+      return res.status(404).json([]);
+    }
+
+    res.json(result.rows.map((row) => row.category)); // Send only category names
   } catch (error) {
-    res
-      .status(500)
-      .json({ status: "error", message: "could not GET from server" });
+    console.error("Error fetching categories:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
+
+app.get("/excuses/random/:category", async function (req, res) {
+  try {
+    const category = decodeURIComponent(req.params.category);
+    const result = await pool.query(
+      "SELECT * FROM soc_wk8_excuses WHERE LOWER(category) = LOWER($1) ORDER BY RANDOM() LIMIT 1",
+      [category]
+    );
+
+    if (result.rows.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "No excuses found for this category" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error fetching excuse:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// async function fetchAllExcuses() {
+//   try {
+//     const getExcuses = await pool.query(
+//       "SELECT * FROM soc_wk8_excuses WHERE category=($1) ORDER BY RANDOM() LIMIT 1",
+//       [category]
+//     );
+//     console.log(getExcuses.rows);
+//     return getExcuses.rows;
+//   } catch (error) {
+//     console.error("Error executing query:", error);
+//     throw error;
+//   }
+// }
+
+// app.get("/", async function (req, res) {
+//   console.log("request received!");
+//   try {
+//     const excuses = await fetchAllExcuses();
+//     console.log(excuses);
+//     res.status(200).json({ status: "success", payload: excuses });
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ status: "error", message: "could not GET from server" });
+//   }
+// });
 
 // async function fetchCatgeoryByName() {
 
