@@ -1,7 +1,6 @@
+import CategoriesContainer from "./components/CategoriesContainer";
+import ExcuseButton from "./components/ExcuseButton";
 import { useReducer } from "react";
-import ExcuseButton from "./components/generateexcusebutton";
-// import ExcusesResponse from "./components/excusesresponse";
-import CategoriesContainer from "./components/categoriescontainer";
 
 const initialState = { category: null, excuse: "" };
 
@@ -18,13 +17,15 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
-    <div>
+    <div className="container">
       <h1>Random Excuse Generator</h1>
       <CategoriesContainer dispatch={dispatch} />
-      <ExcuseButton dispatch={dispatch} category={state.category} />
-      <p>{state.excuse}</p>
-      {/* <ExcusesResponse excuse={excuse} /> */}
+      <ExcuseButton category={state.category} dispatch={dispatch} />
+      <p className="excuse-box">
+        {state.excuse || "Select a category and generate an excuse!"}
+      </p>
     </div>
   );
 }
