@@ -4,7 +4,7 @@ export default function ExcuseButton({ setExcuse }) {
       const response = await fetch(`http://localhost:8080/`);
       const data = await response.json();
       console.log(data);
-      setExcuse(data.payload[0].work);
+      setExcuse(data.payload[0].text);
     } catch (error) {
       console.error("Error fetching excuse:", error);
       setExcuse("Failed to load excuse. Try again!");

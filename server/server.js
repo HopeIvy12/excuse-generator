@@ -24,9 +24,14 @@ app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
 });
 
+let category = "Avoiding People";
+
 async function fetchAllExcuses() {
   try {
-    const getExcuses = await pool.query("SELECT * FROM excuses");
+    const getExcuses = await pool.query(
+      "SELECT * FROM soc_wk8_excuses WHERE category=($1) ORDER BY RANDOM() LIMIT 1",
+      [category]
+    );
     console.log(getExcuses.rows);
     return getExcuses.rows;
   } catch (error) {
@@ -47,5 +52,22 @@ app.get("/", async function (req, res) {
       .json({ status: "error", message: "could not GET from server" });
   }
 });
+
+// async function fetchCatgeoryByName() {
+
+// };
+
+// app.get("/:categories", async function (req, res) {
+//   console.log("request received!");
+//   try {
+//     const categories = await fetchCatgeoryByName();
+//     console.log(excuses);
+//     res.status(200).json({ status: "success", payload: categories });
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ status: "error", message: "could not GET from server" });
+//   }
+// });
 
 console.log("Database URL:", process.env.DATABASE_URL);
