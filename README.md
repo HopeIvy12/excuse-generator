@@ -1,4 +1,5 @@
 Random Excuse Generator
+
 About the Project
 The Random Excuse Generator is a fun web app that provides users with random excuses based on different categories. Users can select a category (e.g., avoiding someone, skipping an event, forgetting to do something) and generate a random excuse to use in any situation.
 
