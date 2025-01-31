@@ -23,7 +23,7 @@ function App() {
       <h1>Random Excuse Generator</h1>
       <CategoriesContainer dispatch={dispatch} />
       <ExcuseButton category={state.category} dispatch={dispatch} />
-      <p className="excuse-box">
+      <p className="excuse-box" data-testid="excuse-box">
         {state.excuse || "Select a category and generate an excuse!"}
       </p>
     </div>
