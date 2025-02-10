@@ -25,21 +25,20 @@ app.listen(PORT, () => {
 });
 
 app.get("/categories", async (req, res) => {
-  // try {
-  res.json("Hello");
-  console.log("Hello");
-  //   const result = await pool.query(
-  //     "SELECT DISTINCT category FROM soc_wk8_excuses"
-  //   );
+  try {
+    const result = await pool.query(
+      "SELECT DISTINCT category FROM soc_wk8_excuses"
+    );
 
-  //   if (result.rows.length === 0) {
-  //     return res.status(404).json([]);
-  //   }
+    if (result.rows.length === 0) {
+      return res.status(404).json([]);
+    }
 
-  //   res.json(result.rows.map((row) => row.category)); // Send only category names
-  // } catch (error) {
-  //   console.error("Error fetching categories:", error);
-  //   res.status(500).json({ error: "Internal server error" });}
+    res.json(result.rows.map((row) => row.category)); // Send only category names
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    res.status(404).json({ error: "Internal server error" });
+  }
 });
 
 app.get("/excuses/random/:category", async function (req, res) {
