@@ -11,7 +11,7 @@ export default function ExcuseButton({ category, dispatch }) {
     try {
       const formattedCategory = encodeURIComponent(category);
       const response = await fetch(
-        `http://localhost:8080/excuses/random/${formattedCategory}`
+        `https://excuse-generator-7oxp.vercel.app${formattedCategory}`
       );
 
       if (!response.ok) {

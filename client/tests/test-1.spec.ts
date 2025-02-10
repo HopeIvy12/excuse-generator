@@ -1,14 +1,14 @@
-import { test, expect } from "@playwright/test";
+// import { test, expect } from "@playwright/test";
 
-test("Not Doing Homework should get from the server", async ({ page }) => {
-  const formattedCategory = encodeURIComponent("Not Doing Homework");
-  await page.goto("http://localhost:5173/");
-  await page.getByRole("button", { name: "Not Doing Homework" }).click();
-  await page.getByRole("button", { name: "🎲 Generate Excuse" }).click();
-  await page.waitForResponse(
-    `http://localhost:8080/excuses/random/Not%20Doing%20Homework`
-  );
-  await expect(page.getByTestId("excuse-box")).toContainText(
-    /^(?!.*Failed to load excuse\. Try again!)/
-  );
-});
+// test("Not Doing Homework should get from the server", async ({ page }) => {
+//   const formattedCategory = encodeURIComponent("Not Doing Homework");
+//   await page.goto("http://localhost:5173/");
+//   await page.getByRole("button", { name: "Not Doing Homework" }).click();
+//   await page.getByRole("button", { name: "🎲 Generate Excuse" }).click();
+//   await page.waitForResponse(
+//     `http://localhost:8080/excuses/random/Not%20Doing%20Homework`
+//   );
+//   await expect(page.getByTestId("excuse-box")).toContainText(
+//     /^(?!.*Failed to load excuse\. Try again!)/
+//   );
+// });

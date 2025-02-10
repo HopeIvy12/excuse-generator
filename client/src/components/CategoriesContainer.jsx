@@ -7,7 +7,7 @@ export default function CategoriesContainer({ dispatch }) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:8080/categories");
+        const response = await fetch("https://excuse-generator-7oxp.vercel.app/categories");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
