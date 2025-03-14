@@ -22,7 +22,8 @@ It's that simple! Now, you're all set to get out of anything with style. 😎
 
 ## **Contributors**  
 A huge thank you to my amazing team members, who helped bring this project to life in just 24 hours:  
-- [Luke Davies](https://github.com/LukeDavies) – Developer  
-- [Jonathan Lee](https://github.com/JonathanLee) – Developer
+- [@HopeIvy12](https://github.com/HopeIvy12) – Developer
+- [Luke Davies](https://github.com/universeluke) – Developer  
+- [Jonathan Lee](https://github.com/bmljlee1) – Developer
 
 
